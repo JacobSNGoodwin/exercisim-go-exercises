@@ -3,10 +3,6 @@ package clock
 
 import "fmt"
 
-// BenchmarkAddMinutes-4           100000000               16.2 ns/op             0 B/op          0 allocs/op
-// BenchmarkSubtractMinutes-4      100000000               16.2 ns/op             0 B/op          0 allocs/op
-// BenchmarkCreateClocks-4         200000000                7.51 ns/op            0 B/op          0 allocs/op
-
 // Clock stores the hours and minutes of a clock with minutes and hours rolled over
 type Clock struct {
 	m int
