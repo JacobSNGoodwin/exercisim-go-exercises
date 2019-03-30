@@ -8,6 +8,8 @@ import "fmt"
 // BenchmarkCreateClocks-4         200000000                7.52 ns/op            0 B/op          0 allocs/op
 
 // Clock stores the hours and minutes of a clock with minutes and hours rolled over
+// I prefer this implementation to only using minues as it is clearer to me. Benchmarks were the same
+// for using only minutes in type clock
 type Clock struct {
 	h int
 	m int
