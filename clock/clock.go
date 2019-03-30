@@ -8,6 +8,7 @@ import "fmt"
 // BenchmarkCreateClocks-4         200000000                7.52 ns/op            0 B/op          0 allocs/op
 
 // Clock stores the hours and minutes of a clock with minutes and hours rolled over
+// I prefer hours and minutes for declation of new in add and subtract
 type Clock struct {
 	h int
 	m int
