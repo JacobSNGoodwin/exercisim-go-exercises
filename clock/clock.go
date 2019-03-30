@@ -4,6 +4,7 @@ package clock
 import "fmt"
 
 // Clock stores the hours and minutes of a clock with minutes and hours rolled over
+// I prefer hours and minutes for declation of new in add and subtract
 type Clock struct {
 	m int
 }
