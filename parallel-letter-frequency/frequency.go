@@ -12,3 +12,11 @@ func Frequency(s string) FreqMap {
 	}
 	return m
 }
+
+// ConcurrentFrequency counts the frequency of each rune in an array of given texts and returns this
+// data as a FreqMap
+func ConcurrentFrequency([]string) FreqMap {
+	m := FreqMap{}
+
+	return m
+}
