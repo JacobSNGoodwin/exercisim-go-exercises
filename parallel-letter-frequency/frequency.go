@@ -1,7 +1,6 @@
 package letter
 
 import (
-	"fmt"
 	"sync"
 )
 
@@ -17,7 +16,6 @@ type SafeCounter struct {
 // Inc increments the counter for the given key.
 func (c *SafeCounter) Inc(key rune) {
 	c.mux.Lock()
-	// Lock so only one goroutine at a time can access the map c.v.
 	c.m[key]++
 	c.mux.Unlock()
 }
@@ -25,7 +23,6 @@ func (c *SafeCounter) Inc(key rune) {
 // Frequency counts the frequency of each rune in a given text and returns this
 // data as a FreqMap.
 // Pre safety
-// BenchmarkSequentialFrequency-4   	  100000	     22521 ns/op	    2995 B/op	      13 allocs/op
 func Frequency(s string) FreqMap {
 	m := FreqMap{}
 	for _, r := range s {
@@ -37,14 +34,18 @@ func Frequency(s string) FreqMap {
 // ConcurrentFrequency counts the frequency of each rune in an array of given texts and returns this
 // data as a FreqMap
 func ConcurrentFrequency(t []string) FreqMap {
+	var wg sync.WaitGroup
+	wg.Add(len(t))
 	c := SafeCounter{m: make(map[rune]int)}
 	for _, text := range t {
-		go func(text string) {
-			for _, r := range text {
-				fmt.Println(r)
+		go func(s string) {
+			defer wg.Done()
+			for _, r := range s {
 				c.Inc(r)
 			}
 		}(text) // function must be called with text passed in (I guess?)
 	}
+
+	wg.Wait()
 	return c.m
 }
