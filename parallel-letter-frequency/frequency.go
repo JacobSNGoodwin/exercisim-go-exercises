@@ -24,12 +24,13 @@ func (c *SafeCounter) Inc(key rune) {
 
 // Frequency counts the frequency of each rune in a given text and returns this
 // data as a FreqMap.
+// Pre safety
+// BenchmarkSequentialFrequency-4   	  100000	     22521 ns/op	    2995 B/op	      13 allocs/op
 func Frequency(s string) FreqMap {
 	m := FreqMap{}
 	for _, r := range s {
 		m[r]++
 	}
-	fmt.Println(m)
 	return m
 }
 
@@ -38,7 +39,12 @@ func Frequency(s string) FreqMap {
 func ConcurrentFrequency(t []string) FreqMap {
 	c := SafeCounter{m: make(map[rune]int)}
 	for _, text := range t {
-		go Frequency(text)
+		go func(text string) {
+			for _, r := range text {
+				fmt.Println(r)
+				c.Inc(r)
+			}
+		}(text) // function must be called with text passed in (I guess?)
 	}
 	return c.m
 }
