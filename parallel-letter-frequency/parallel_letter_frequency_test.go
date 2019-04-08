@@ -64,11 +64,11 @@ func TestSequentialFrequency(t *testing.T) {
 	}
 }
 
-func BenchmarkSequentialFrequency(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		Frequency(euro + dutch + us)
-	}
-}
+// func BenchmarkSequentialFrequency(b *testing.B) {
+// 	for i := 0; i < b.N; i++ {
+// 		Frequency(euro + dutch + us)
+// 	}
+// }
 
 // func BenchmarkConcurrentFrequency(b *testing.B) {
 // 	for i := 0; i < b.N; i++ {
