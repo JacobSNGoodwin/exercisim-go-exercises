@@ -1,12 +1,22 @@
 package tree
 
-// Record gives the id of a record and of it's direct parent
+// Record holds the ID of the current record and that of its nearest parent
 type Record struct {
 	ID     int
 	Parent int
 }
 
-// Build creates a tree of records based on parents and children
-func Build(records []Record) (*Node, error) {
+// Node holds the id of the current node and a reference array its nearest descendants
+type Node struct {
+	ID       int
+	Children []*Node
+}
 
+// Build creates node tree for an array of records
+func Build(rs []Record) (*Node, error) {
+	if len(rs) == 0 {
+		return nil, nil
+	}
+
+	return nil, nil
 }
