@@ -26,8 +26,8 @@ func Build(rs []Record) (*Node, error) {
 	}
 
 	// order node id's. Since we expect contiguous id's here
-	// this will also help in error handling
-	for i, r := range rs {
+`	// this will also help in error handling
+`	for i, r := range rs {
 		if r.ID < 0 || r.ID >= len(rs) {
 			return nil, fmt.Errorf("Must have contigous ID's")
 		}
